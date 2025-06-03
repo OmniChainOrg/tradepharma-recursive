@@ -25,3 +25,14 @@ To get started with Zefir Bot, simply sign up for an account on the website. Onc
 Support
 
 If you have any questions or need support with Zefir Bot, please contact our customer service team at support@zefir.co.
+
+Running Tests
+-------------
+
+Use Django's built-in test runner to execute the automated test suite:
+
+```bash
+python manage.py test
+```
+
+This command discovers and runs tests for all installed apps in the project.
