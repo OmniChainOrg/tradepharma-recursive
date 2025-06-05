@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'p+t)0in--(6ga&a299+$71zdw6_9c85ustrej)0x)lx25ga=q8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["tradepharma-recursive.onrender.com"]
 
