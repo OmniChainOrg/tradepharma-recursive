@@ -17,3 +17,7 @@ echo "===== build.sh: applying migrations ====="
 python manage.py migrate
 
 echo "===== build.sh: build.sh completed ====="
+
+pip install -r requirements.txt
+python manage.py collectstatic --noinput
+python manage.py migrate
