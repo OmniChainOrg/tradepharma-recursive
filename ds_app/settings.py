@@ -2,6 +2,7 @@
 Django settings for ds_app project.
 
 Improved for production deployment on Render.
+Added django-cors-headers support for API cross-origin requests.
 """
 import os
 from django.core.exceptions import ImproperlyConfigured
@@ -31,20 +32,10 @@ ALLOWED_HOSTS = os.getenv(
     "tradepharma-recursive.onrender.com,localhost,127.0.0.1"
 ).split(",")
 
-# DATABASES
-# Use Render's DATABASE_URL or fallback to local SQLite
-DATABASES = {
-    "default": dj_database_url.config(
-        default=os.getenv(
-            "DATABASE_URL",
-            f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"
-        ),
-        conn_max_age=600,
-    )
-}
-
-# Application definition
+# INSTALLED_APPS
+# Add 'corsheaders' to support cross-origin API requests
 INSTALLED_APPS = [
+    'corsheaders',
     'ds_bot',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,7 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+# MIDDLEWARE
+# Insert CorsMiddleware at top for CORS handling
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -65,8 +59,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# CORS settings
+# You can restrict origins or allow all
+CORS_ALLOW_ALL_ORIGINS = True  # or set False and use CORS_ALLOWED_ORIGINS
+# CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
+
+# ROOT URL config
 ROOT_URLCONF = 'ds_app.urls'
 
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -83,7 +84,19 @@ TEMPLATES = [
     },
 ]
 
+# WSGI
 WSGI_APPLICATION = 'ds_app.wsgi.application'
+
+# Database
+DATABASES = {
+    "default": dj_database_url.config(
+        default=os.getenv(
+            "DATABASE_URL",
+            f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"
+        ),
+        conn_max_age=600,
+    )
+}
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
