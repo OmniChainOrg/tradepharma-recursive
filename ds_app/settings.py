@@ -60,9 +60,9 @@ MIDDLEWARE = [
 ]
 
 # CORS settings
-# You can restrict origins or allow all
-CORS_ALLOW_ALL_ORIGINS = True  # or set False and use CORS_ALLOWED_ORIGINS
-# CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
+# Restrict CORS to the frontend domain (set via env var)
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', 'https://tradepharma-simzone.netlify.app').split(',')
 
 # ROOT URL config
 ROOT_URLCONF = 'ds_app.urls'
