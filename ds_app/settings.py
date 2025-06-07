@@ -7,7 +7,6 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
-"""
 
 import os
 
@@ -23,7 +22,6 @@ SECRET_KEY = 'p+t)0in--(6ga&a299+$71zdw6_9c85ustrej)0x)lx25ga=q8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
 
 if os.getenv("RENDER_ENV") == "development":
     DEBUG = True
