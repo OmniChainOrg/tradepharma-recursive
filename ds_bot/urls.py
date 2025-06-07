@@ -1,9 +1,27 @@
-from django.urls import path
+# ds_app/urls.py
 
-from . import views
+from django.contrib import admin
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+
+from ds_bot.api import ItemViewSet  # your DRF viewset
+
+# 1) Set up DRF router for the API
+router = DefaultRouter()
+router.register(r'items', ItemViewSet, basename='item')
 
 urlpatterns = [
-    path('', views.dashboard, name='dashboard'),
-    path('items/', views.item_list, name='item_list'),
-    path('items/<int:pk>/', views.item_detail, name='item_detail'),
+    # 2) Admin
+    path('admin/', admin.site.urls),
+
+    # 3) API endpoints
+    #    GET  /api/items/       → list/create
+    #    GET  /api/items/{pk}/  → retrieve/update/destroy
+    path('api/', include(router.urls)),
+
+    # 4) Your existing template-based views
+    #    GET  /             → views.dashboard
+    #    GET  /items/       → views.item_list
+    #    GET  /items/<pk>/  → views.item_detail
+    path('', include('ds_bot.urls')),
 ]
