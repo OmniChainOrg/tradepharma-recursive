@@ -7,6 +7,8 @@ from rest_framework.routers import DefaultRouter
 
 from ds_bot.api import ItemViewSet  # your DRF viewset
 
+app_name = 'ds_bot' 
+
 # 1) Set up DRF router for the API
 router = DefaultRouter()
 router.register(r'items', ItemViewSet, basename='item')
