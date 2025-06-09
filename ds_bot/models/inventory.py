@@ -9,7 +9,6 @@ class Inventory(models.Model):
     def __str__(self):
         return self.name
 
-
 class InventoryItem(models.Model):
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
