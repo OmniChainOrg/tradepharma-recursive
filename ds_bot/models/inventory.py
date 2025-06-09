@@ -16,12 +16,6 @@ class InventoryItem(models.Model):
     def __str__(self):
         return f"{self.inventory} - {self.item}"
 
-class Item(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
 class Offer(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
