@@ -16,14 +16,6 @@ class InventoryItemAdmin(admin.ModelAdmin):
     list_filter = ('inventory', 'item')
     search_fields = ('inventory__user__name', 'item__name')
 
-
-@admin.register(DiscordUser)
-class DiscordUserAdmin(admin.ModelAdmin):
-    list_display = ('user_id', 'name', 'bot', 'created_date')
-    list_filter = ('bot',)
-    search_fields = ('user_id', 'name')
-
-
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'price', 'stock', 'date_added', 'user')
