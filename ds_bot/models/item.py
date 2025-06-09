@@ -1,4 +1,4 @@
-# ds_bot/models/product.py
+# ds_bot/models/item.py
 from django.db import models
 
 class Product(models.Model):
