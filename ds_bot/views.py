@@ -1,15 +1,18 @@
 # ds_bot/views.py
-from rest_framework import viewsets
-from .models import Item
-from .serializers import ItemSerializer
-from django.db.models import Q
-from rest_framework import generics
-from ds_bot.models import Item
-from ds_bot.serializers import ItemSerializer
 
-class ItemViewSet(ModelViewSet):
+from rest_framework import viewsets, generics
+from rest_framework.filters import SearchFilter
+from django.db.models import Q
+
+from ds_bot.models import Item, Match
+from ds_bot.serializers import ItemSerializer, MatchSerializer
+
+
+class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ['name', 'description']
 
     def get_queryset(self):
         queryset = Item.objects.all()
@@ -20,6 +23,7 @@ class ItemViewSet(ModelViewSet):
                 Q(description__icontains=search_term)
             )
         return queryset
+
 
 class MatchList(generics.ListAPIView):
     queryset = Match.objects.all()
