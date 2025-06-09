@@ -3,6 +3,9 @@ from rest_framework import viewsets
 from .models import Item
 from .serializers import ItemSerializer
 from django.db.models import Q
+from rest_framework import generics
+from ds_bot.inventory.inventory import Match
+from ds_bot.serializers import MatchSerializer
 
 class ItemViewSet(viewsets.ModelViewSet):
     serializer_class = ItemSerializer
@@ -16,3 +19,7 @@ class ItemViewSet(viewsets.ModelViewSet):
                 Q(description__icontains=search_term)
             )
         return queryset
+
+class MatchList(generics.ListAPIView):
+    queryset = Match.objects.all()
+    serializer_class = MatchSerializer
