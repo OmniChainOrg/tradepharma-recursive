@@ -1,6 +1,5 @@
 # ds_bot/models/__init__.py
-from .models import Inventory
-from .models import InventoryItem
+from .invetory import Inventory
 from .item import Item
 from .offer import Offer
 from .demand import Demand
