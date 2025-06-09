@@ -14,7 +14,7 @@ class Company(models.Model):
         verbose_name_plural = "Companies"
 
 
-class Product(models.Model):
+class Item(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
 
@@ -23,7 +23,7 @@ class Product(models.Model):
 
 
 class Offer(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    item = models.ForeignKey(item, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     price_per_unit = models.DecimalField(max_digits=10, decimal_places=2)
     location = models.CharField(max_length=255)
@@ -36,11 +36,11 @@ class Offer(models.Model):
     created_at = models.DateTimeField(default=now)
 
     def __str__(self):
-        return f"{self.product.name} - {self.quantity} units by {self.company}"
+        return f"{self.item.name} - {self.quantity} units by {self.company}"
 
 
 class Demand(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    item = models.ForeignKey(item, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     max_price_per_unit = models.DecimalField(max_digits=10, decimal_places=2)
     location = models.CharField(max_length=255)
@@ -53,7 +53,7 @@ class Demand(models.Model):
     created_at = models.DateTimeField(default=now)
 
     def __str__(self):
-        return f"{self.product.name} demand - {self.quantity} units by {self.company}"
+        return f"{self.item.name} demand - {self.quantity} units by {self.company}"
 
 
 class Match(models.Model):
