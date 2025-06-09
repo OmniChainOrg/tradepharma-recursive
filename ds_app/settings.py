@@ -47,6 +47,14 @@ INSTALLED_APPS = [
     'django_filters.rest_framework.DjangoFilterBackend',
 ]
 
+#  REST_FRAMEWORK
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
+}
+
 # MIDDLEWARE
 # Insert CorsMiddleware at top for CORS handling
 MIDDLEWARE = [
