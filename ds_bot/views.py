@@ -1,24 +1,18 @@
-from django.http import JsonResponse, Http404
-from django.shortcuts import get_object_or_404
-
+# ds_bot/views.py
+from rest_framework import viewsets
 from .models import Item
+from .serializers import ItemSerializer
+from django.db.models import Q
 
+class ItemViewSet(viewsets.ModelViewSet):
+    serializer_class = ItemSerializer
 
-def item_list(request):
-    """Return a JSON list of all items."""
-    items = list(Item.objects.values('id', 'name', 'description', 'price', 'stock'))
-    return JsonResponse({'items': items})
-
-
-def item_detail(request, pk):
-    """Return details for a single item."""
-    item = get_object_or_404(Item, pk=pk)
-    data = {
-        'id': item.id,
-        'name': item.name,
-        'description': item.description,
-        'price': str(item.price),
-        'stock': item.stock,
-    }
-    return JsonResponse({'item': data})
-
+    def get_queryset(self):
+        queryset = Item.objects.all()
+        search_term = self.request.query_params.get('search', None)
+        if search_term:
+            queryset = queryset.filter(
+                Q(name__icontains=search_term) |
+                Q(description__icontains=search_term)
+            )
+        return queryset
