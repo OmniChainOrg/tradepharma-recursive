@@ -1,10 +1,8 @@
-# ds_bot/urls.py
-from django.urls import path
-from . import views
-
-app_name = 'ds_bot'  # Optional but good practice
+# ds_app/urls.py
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
-    path('items/', views.ItemViewSet.as_view({'get': 'list'}), name='item-list'),
-    path('matches/', views.MatchList.as_view(), name='match-list'),
+    path('admin/', admin.site.urls),
+    path('api/', include('ds_bot.urls')),  # Includes URLs from ds_bot/urls.py
 ]
