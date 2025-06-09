@@ -1,8 +1,7 @@
-# ds_bot/serializers.py
 from rest_framework import serializers
-from .models import Item
+from .models import Match, Offer, Demand
 
-class ItemSerializer(serializers.ModelSerializer):
+class MatchSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Item
-        fields = '__all__'
+        model = Match
+        fields = ['id', 'offer', 'demand', 'matched_at', 'status']
