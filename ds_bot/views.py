@@ -4,10 +4,11 @@ from .models import Item
 from .serializers import ItemSerializer
 from django.db.models import Q
 from rest_framework import generics
-from ds_bot.inventory.inventory import Match
-from ds_bot.serializers import MatchSerializer
+from ds_bot.models import Item
+from ds_bot.serializers import ItemSerializer
 
-class ItemViewSet(viewsets.ModelViewSet):
+class ItemViewSet(ModelViewSet):
+    queryset = Item.objects.all()
     serializer_class = ItemSerializer
 
     def get_queryset(self):
