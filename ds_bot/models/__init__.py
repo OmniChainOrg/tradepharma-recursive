@@ -1,4 +1,7 @@
 # ds_bot/models/__init__.py
-from .offers import Offer
-from .demands import Demand
-from .matches import Match
+from .product import Product
+from .offer import Offer
+from .demand import Demand
+from .match import Match
+
+__all__ = ['Product', 'Offer', 'Demand', 'Match']
