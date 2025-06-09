@@ -26,3 +26,10 @@ class Match(models.Model):
     demand = models.ForeignKey(Demand, on_delete=models.CASCADE)
     matched_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(default='pending', max_length=50)
+
+class InventoryItem(models.Model):
+    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.inventory} - {self.item}"
