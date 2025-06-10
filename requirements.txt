@@ -1,0 +1,11 @@
+Django>=3.0
+discord.py
+stripe
+asgiref
+gunicorn
+dj-database-url
+psycopg2-binary
+whitenoise[brotli]
+django-cors-headers
+django-filter
+djangorestframework
