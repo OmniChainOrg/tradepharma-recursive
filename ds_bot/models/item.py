@@ -1,4 +1,5 @@
 # ds_bot/models/item.py
+
 from django.db import models
 
 class Item(models.Model):
@@ -7,4 +8,3 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
-        
